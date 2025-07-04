@@ -6,11 +6,24 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXFileReference section */
+		DF7DD84B2E16F49B0009256C /* Easy_DP.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Easy_DP.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		DF7DD8412E16F3ED0009256C = {
 			isa = PBXGroup;
 			children = (
+				DF7DD8482E16F4220009256C /* DP */,
 			);
+			sourceTree = "<group>";
+		};
+		DF7DD8482E16F4220009256C /* DP */ = {
+			isa = PBXGroup;
+			children = (
+				DF7DD84B2E16F49B0009256C /* Easy_DP.playground */,
+			);
+			path = DP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
