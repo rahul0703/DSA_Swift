@@ -118,6 +118,91 @@ obj.isEating() // Output: is eating \n Child is eating
 
 //--------------------------------------------------------------------------------------------------
 /*
- 
+ Polimorphism in swift
+    1. Polymorphism: Polymorphism means "many forms". It allows different types (usually subclasses) to be treated as one common supertype, typically using a parent class or protocol.
+        This helps in:
+            1. Writing reusable code
+            2. Calling overridden methods at runtime
+            3. Working with generic data structures
+    2. Types of Polimorphism:
+        a. Subtype Polymorphism: class inheritance
+        b. Protocol Polymorphism: Protocols with conforming types
+        c. Parametric Polymorphism: Generics
+        d. Ad-hoc Polymorphism: Function overloading
  */
+/*
+ Subtype Polymorphism
+    - Inheritance allows subclasses to be treated as instances of their superclass.
+    - This enables method overriding, where a subclass can provide its own implementation of a method defined in the superclass.
+ 
+    In the example below: Even though animals is of type [Animal], the correct overridden method is called — that’s polymorphism!
+ */
+class Animal {
+    func makeSound() {
+        print("Some animal sound")
+    }
+}
+class Dog: Animal {
+    override func makeSound() {
+        print("Bark")
+    }
+}
+class Cat: Animal {
+    override func makeSound() {
+        print("Meow")
+    }
+}
+let animals: [Animal] = [Dog(), Cat(), Dog()]
+for animal in animals {
+    animal.makeSound() // Output: Bark, Meow, Bark
+}
+
+/*
+ Protocol Polymorphism
+    - Protocols define a blueprint of methods and properties that conforming types must implement.
+    - This allows different types to be treated uniformly if they conform to the same protocol.
+ 
+ Note: This is powerful because Drawable can be implemented by classes, structs, enums — not just subclasses like with class inheritance.
+ */
+protocol Drawable {
+    func draw()
+}
+class Circle: Drawable {
+    func draw() {
+        print("Drawing a circle")
+    }
+}
+class Rectangle: Drawable {
+    func draw() {
+        print("Drawing a rectangle")
+    }
+}
+let shapes: [Drawable] = [Circle(), Rectangle()]
+for shape in shapes {
+    shape.draw()
+}
+
+/*
+ Parametric Polymorphism
+    - Generics allow you to write flexible and reusable code that can work with any type.
+    - This is achieved by defining functions or types with type parameters.
+ */
+func printItems<T>(items: [T]) {
+    for item in items {
+        print(item)
+    }
+}
+printItems(items: [1, 2, 3])         // Works with Int
+printItems(items: ["a", "b", "c"])
+
+/*
+    Ad-hoc Polymorphism
+    - Function overloading allows you to define multiple functions with the same name but different parameter types or counts.
+ */
+func add(_ a: Int, _ b: Int) -> Int {
+    return a + b
+}
+func add(_ a: String, _ b: String) -> String {
+    return a + b
+}
 
