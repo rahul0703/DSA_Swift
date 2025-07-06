@@ -26,12 +26,18 @@
 			path = "Stacks and Queue";
 			sourceTree = "<group>";
 		};
+		DF6CEE192E1A63BB007A73AB /* Swift Basics */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Swift Basics";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXGroup section */
 		DF7DD8412E16F3ED0009256C = {
 			isa = PBXGroup;
 			children = (
+				DF6CEE192E1A63BB007A73AB /* Swift Basics */,
 				DF6CEE162E199B43007A73AB /* Stacks and Queue */,
 				DF6CEE142E1983B7007A73AB /* Linkedlist */,
 				DF6CEE112E182EFE007A73AB /* Recursion */,

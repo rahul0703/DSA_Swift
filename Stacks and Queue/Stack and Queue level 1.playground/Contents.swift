@@ -64,5 +64,88 @@ isBalancedParantheses(expression: "([)]")
 
 
 /*
- Question 3: 
+ Question 3: Next greater element to the right
+ Desc: Given an array, find the next greater element for each element in the array.
+ Sample testcase: [1,3,6,2,8,4,5,7] -> [3,6,8,8,-1,5,7,-1]
+ Solution: We can use a stack to keep track of the next greater elements
  */
+
+func nextGreaterElementToRight(arr: [Int]) -> [Int] {
+    var solArray: [Int] = []
+    var stack: [Int] = []
+    var n = arr.count
+    
+    for i in (0..<n).reversed() {
+        if i == n-1 {
+            solArray.append(-1) // Last element has no next greater element
+        } else {
+            while !stack.isEmpty && stack.last! <= arr[i] {
+                stack.popLast() //Pop elements that are not greater than the current element
+            }
+            if stack.isEmpty {
+                solArray.append(-1) // No greater element found
+            } else {
+                solArray.append(stack.last!) // Next greater element found
+            }
+        }
+        stack.append(arr[i]) // Push the current element onto the stack
+    }
+    return solArray.reversed() // Reverse the result to maintain original order
+}
+
+nextGreaterElementToRight(arr: [1,3,6,2,8,4,5,7]) // [3,6,8,8,-1,5,7,-1]
+
+/*
+ Question 4: Largest area in histogram
+ desc: Given an array representing the heights of bars in a histogram, find the largest rectangular area that can be formed.
+ Soluton: Find the next smaller element to the left and right for each bar, then calculate the area using these indices.
+ Video: https://youtu.be/0do2734xhnU?si=2GX40Uw0x_MHgix9
+ */
+func largestAreaInHistogram(heights: [Int]) -> Int {
+    var n = heights.count
+    var leftSmaller = findLeftSmaller(heights: heights, n: n)
+    var rightSmaller = findRightSmaller(heights: heights, n: n)
+    var maxArea = 0
+    for i in 0 ..< n {
+        let width = rightSmaller[i] - leftSmaller[i] - 1
+        let area = heights[i] * width
+        maxArea = max(maxArea, area)
+    }
+    return maxArea
+}
+
+private func findLeftSmaller(heights: [Int], n: Int) -> [Int] {
+    var stack = [Int]()
+    var leftSmaller: [Int] = []
+    
+    for i in 0 ..< n {
+        while !stack.isEmpty && heights[stack.last!] >= heights[i] {
+            stack.removeLast()
+        }
+        if stack.isEmpty {
+            leftSmaller.append(-1) // No smaller element to the left
+        } else {
+            leftSmaller.append(stack.last!) // Index of the last smaller element
+        }
+        stack.append(i) // Push current index onto the stack
+    }
+    return leftSmaller
+}
+
+private func findRightSmaller(heights: [Int], n: Int) -> [Int] {
+    var stack = [Int]()
+    var rightSmaller: [Int] = []
+    
+    for i in (0 ..< n).reversed() {
+        while !stack.isEmpty && heights[stack.last!] >= heights[i] {
+            stack.removeLast()
+        }
+        if stack.isEmpty {
+            rightSmaller.append(n) // No smaller element to the right
+        } else {
+            rightSmaller.append(stack.last!) // Index of the last smaller element
+        }
+        stack.append(i) // Push current index onto the stack
+    }
+    return rightSmaller.reversed() // Reverse to maintain original order
+}
