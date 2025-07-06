@@ -1,4 +1,13 @@
 /*
+ Is Swift a completely OOP language?
+ Answer:
+    No, Swift is not a completely Object-Oriented Programming (OOP) language — it is a multi-paradigm language, meaning it supports various programming styles, including:
+    - OOP (Object-Oriented Programming)
+    - Functional Programming
+    - Protocol-Oriented Programming (POP) - Swift's unique take on OOP, emphasizing protocols over classes.
+ */
+
+/*
  Q: What is OOPs in swift?
  Answer:
  OOP (Object-Oriented Programming) is a programming paradigm based on the concept of “objects”, which can contain:
@@ -206,3 +215,18 @@ func add(_ a: String, _ b: String) -> String {
     return a + b
 }
 
+//--------------------------------------------------------------------------------------------------
+/*
+ Abstraction in swift
+    1. Abstraction: Hiding complex implementation details and exposing only the necessary parts of an object.
+        Usages:
+        a. To reduce complexity
+        b. To hide details and show a clean interface
+        c. To allow you to change internals without affecting the outer code
+ 
+    2. Abstraction can be achieved using:
+        a. Abstract Classes: Classes that cannot be instantiated directly and may contain abstract methods (methods without implementation).
+        b. Protocols: Define a blueprint of methods and properties that conforming types must implement.
+        c. Abstract controls: Hide internal implementation using private, internal, etc.
+ 
+ */
