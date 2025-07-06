@@ -46,8 +46,8 @@ func fibonacciSequenceUsingTabulation(n: Int) -> Int {
     }
     return dp[n]
 }
-fibonacciSequenceUsingRecursion(n: 10)
-fibonacciSequenceUsingTabulation(n: 8)
+//fibonacciSequenceUsingRecursion(n: 10)
+//fibonacciSequenceUsingTabulation(n: 8)
 
 //-------------------------------------------------------------------------------
 /*
@@ -84,8 +84,8 @@ func climbingDownStairsUsingTabulation(n: Int) -> Int {
     }
     return dp[n]
 }
-climbingDownStairsUsingMemozation(n: 10)
-climbingDownStairsUsingTabulation(n: 10)
+//climbingDownStairsUsingMemozation(n: 10)
+//climbingDownStairsUsingTabulation(n: 10)
 //-------------------------------------------------------------------------------
 /*
  Question 3: Minimum Cost Path
@@ -143,8 +143,8 @@ var grid = [
     [1, 5, 4],
     [4, 2, 1]
 ]
-minCostPathUsingMemoization(grid: grid)
-minCostPathUsingTabulation(grid: grid)
+//minCostPathUsingMemoization(grid: grid)
+//minCostPathUsingTabulation(grid: grid)
 
 // -------------------------------------------------------------------------------
 //New group of DP questions - Target Sum subsets - Most IMP
@@ -212,8 +212,8 @@ func subsetSumUsingTabulation(nums: [Int], target: Int) -> Bool {
 }
     
 var num = [3, 34, 4, 12, 2, 3]
-subsetSumUsingMemoization(nums: num, target: 9)
-subsetSumUsingTabulation(nums: num, target: 9)
+//subsetSumUsingMemoization(nums: num, target: 9)
+//subsetSumUsingTabulation(nums: num, target: 9)
 
 //-------------------------------------------------------------------------------
 /*
@@ -262,8 +262,8 @@ func coinChangePermutationUsingTabulation(coins: [Int], target: Int) -> Int {
     return dp[target]
 }
 var nums = [1, 2, 5]
-coinChangePermutationUsingMemoization(coins: nums, target: 5)
-coinChangePermutationUsingTabulation(coins: nums, target: 5)
+//coinChangePermutationUsingMemoization(coins: nums, target: 5)
+//coinChangePermutationUsingTabulation(coins: nums, target: 5)
 
 
 
@@ -311,12 +311,12 @@ private func calculateCoinChangeCombination(_ dp: inout [[Int]], _ coins: [Int],
     return dp[index][target]
 }
 
-coinChangeCombinationUsingTabulation(coins: nums, target: 5)
-coinChangeCombinationUsingMemoization(coins: nums, target: 5)
+//coinChangeCombinationUsingTabulation(coins: nums, target: 5)
+//coinChangeCombinationUsingMemoization(coins: nums, target: 5)
 
 //-------------------------------------------------------------------------------
 /*
- Question 4: Knapsack problem
+ Question 4: 0-1 Knapsack problem
  Desc: Given a set of items, each with a weight and value, determine the maximum value that can be obtained by selecting items such that their total weight does not exceed a given capacity.
  */
 func knapsackUsingTabulation(items: [(weight: Int, value: Int)], capacity: Int) -> Int {
@@ -365,8 +365,146 @@ private func calculateKnapsack(_ dp: inout [[Int]], _ items: [(weight: Int, valu
 }
 
 var items = [(weight: 1, value: 1), (weight: 3, value: 4), (weight: 4, value: 6)]
-knapsackUsingTabulation(items: items, capacity: 5)
-knapsackleUsingMemoization(items: items, capacity: 5)
+//knapsackUsingTabulation(items: items, capacity: 5)
+//knapsackleUsingMemoization(items: items, capacity: 5)
+
+//-------------------------------------------------------------------------------
+/*
+ Question 5: Unbounded Knapsack problem
+    Desc: Given a set of items, each with a weight and value, determine the maximum value that can be obtained by selecting items such that their total weight does not exceed a given capacity. Each item can be selected multiple times.
+ */
+func unboundedKnapsackUsingTabulation(items: [(weight: Int, value: Int)], capacity: Int) -> Int {
+    var n = items.count
+    var dp = Array(repeating: 0, count: capacity + 1)
+    
+    for i in 0 ... capacity {
+        if i == 0 {
+            dp[i] = 0 // Base case: 0 capacity means 0 value
+            continue
+        }
+        for j in 0 ..< n {
+            if i >= items[j].weight {
+                dp[i] = max(dp[i], dp[i-items[j].weight] + items[j].value)
+            }
+        }
+    }
+    
+    return dp[capacity]
+}
+items = [(weight: 2, value: 3), (weight: 3, value: 4), (weight: 4, value: 5)]
+let capacity = 6
+//unboundedKnapsackUsingTabulation(items: items, capacity: capacity)
+
+
+func unboundedKnapsackUsingMemoization(items: [(weight: Int, value: Int)], capacity: Int) -> Int {
+    var n = items.count
+    var dp = Array(repeating: Array(repeating: -1, count: capacity + 1), count: n)
+    
+    return calculateUnboundedKnapsack(&dp, items, capacity, 0)
+}
+
+private func calculateUnboundedKnapsack(_ dp: inout [[Int]], _ items: [(weight: Int, value: Int)], _ capacity: Int, _ index: Int) -> Int {
+    if index >= items.count { return 0 }
+    if capacity == 0 { return 0 }
+    if dp[index][capacity] != -1 { return dp[index][capacity] }
+    
+    // Exclude current item
+    let exclude = calculateUnboundedKnapsack(&dp, items, capacity, index + 1)
+    // Include current item (can take again)
+    var include = 0
+    if capacity >= items[index].weight {
+        include = items[index].value + calculateUnboundedKnapsack(&dp, items, capacity - items[index].weight, index)
+    }
+    dp[index][capacity] = max(include, exclude)
+    return dp[index][capacity]
+}
+//unboundedKnapsackUsingMemoization(items: items, capacity: 6)
+//-------------------------------------------------------------------------------
+
+/*
+ New Group of DP question: Include exclude principle
+ Question 1: Count bunary strings with no consecutive 0's
+ Desc: Given a binary string of length n, count the number of binary strings with no consecutive 0's.
+ Solution: The problem can be solved by considering the last character of the string. If the last character is 1, then the previous character can be either 0 or 1. If the last character is 0, then the previous character must be 1.
+ DP: 2*N dp where N is the length of the string. We store the number of strings ending with 0 and 1 separately.
+ */
+
+func countBinaryStringsNoConsecutiveZerosTabulation(n: Int) -> Int {
+    if n == 0 {
+        return 0
+    }
+    var dp = Array(repeating: Array(repeating: 0, count: n), count: 2)
+    for i in 0 ..< n {
+        if i == 0 {
+            dp[0][i] = 1 // Base case: "0"
+            dp[1][i] = 1 // Base case: "1"
+        } else {
+            dp[0][i] = dp[1][i-1]
+            dp[1][i] = dp[0][i-1] + dp[1][i-1]
+        }
+    }
+    return dp[0][n-1] + dp[1][n-1] // Total number of valid binary strings of length n
+}
+//countBinaryStringsNoConsecutiveZerosTabulation(n: 3)
+
+func countBinaryStringsNoConsecutiveZerosMemoization(n: Int) -> Int {
+    var dp = Array(repeating: Array(repeating: -1, count: n), count: 2)
+    return calculateBinaryStrings(&dp, n-1, 0) + calculateBinaryStrings(&dp, n-1, 1)
+}
+
+private func calculateBinaryStrings(_ dp: inout [[Int]], _ n: Int, _ char: Int) -> Int {
+    if n == 0 {
+        dp[char][n] = 1
+        return 1
+    }
+    if dp[char][n] != -1 {
+        return dp[char][n]
+    }
+    var count_1 = calculateBinaryStrings(&dp, n - 1, 1) // If last character is 1
+    var count_0 = calculateBinaryStrings(&dp, n-1, 0) // If last character is 0
+    
+    if char == 0 {
+        dp[char][n] = count_1 // If last character is 0, previous must be 1
+    } else {
+        dp[char][n] = count_0 + count_1 // If last character is 1, previous can be 0 or 1
+    }
+    
+    return dp[char][n]
+}
+countBinaryStringsNoConsecutiveZerosMemoization(n: 3)
+
+//-------------------------------------------------------------------------------
+/*
+ Question 2: Count Subsequences of form A^i B^j C^k
+ Desc: Given a string containing only characters 'A', 'B', and 'C', count the number of subsequences of the form A^i B^j C^k where i, j, k > 0.
+    Solution: The problem can be solved by using dynamic programming. We can maintain three counts for 'A', 'B', and 'C' and update them as we traverse the string.
+ Solution video https://youtu.be/IV9pbZsi5cc?si=9qd52iVmETeUrSsD
+ next A: 2*prev_A + 1
+ next B: 2*prev_B + prev_A
+ next C: 2*prev_C + prev_B
+ |        |  0  |  1 (a)           |  2 (b)                |  3 (c)                |  4 (a)                |  5 (b)                |  6 (c)                |
+ |--------|-----|------------------|-----------------------|-----------------------|-----------------------|-----------------------|-----------------------|
+ | aCount |  0  | 1 = 2*0+1        | 1 = 1                 | 1 = 1                 | 3 = 2*1+1             | 3 = 3                 | 3 = 3                 |
+ | bCount |  0  | 0                | 1 = 2*0+1             | 1 = 1                 | 1 = 1                 | 5 = 2*1+3             | 5 = 5                 |
+ | cCount |  0  | 0                | 0                     | 1 = 2*0+1             | 1 = 1                 | 1 = 1                 | 11 = 2*1+5            |
+ */
+
+func countSubsequencesUsingTabulation(s: String) -> Int {
+    var aCount = 0, bCount = 0, cCount = 0
+    for ch in s {
+        if ch == "a" {
+            aCount = 2 * aCount + 1
+        } else if ch == "b" {
+            bCount = 2 * bCount + aCount
+        } else if ch == "c" {
+            cCount = 2 * cCount + bCount
+        }
+    }
+    return cCount
+}
+    
+    
+    
 
 
 
