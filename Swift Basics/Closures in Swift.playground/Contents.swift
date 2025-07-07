@@ -1,3 +1,4 @@
+import Foundation
 /*
  Closures in Swift — one of the most commonly asked interview topics and also very powerful and flexible features in Swift.
  
@@ -87,3 +88,26 @@ let sortedShorthand = numbers.sorted(by: { $0 < $1 })
 //Trailing closure
 let sortedTrailing = numbers.sorted { $0 < $1 }
 
+/*
+ Escaping and non-escaping Closures
+ 
+ * Non-escaping closures are closures that are guaranteed to be executed before the function returns. They can be used directly within the function.
+    -Closure is executed within the function.
+    -No need to use self.
+ * Escaping closures are closures that can be executed after the function returns. They are typically used for asynchronous operations or completion handlers.
+    -Closure is executed after the function returns.
+    -Often used in async APIs, like network calls.
+    -Must mark with @escaping.
+    -You must use self inside escaping closures to avoid retain cycles.
+ */
+//Non escaping closure example
+func doSomething(_ closure: () -> Void) {
+    closure()
+}
+//Escaping closure example
+func fetchData(completion: @escaping () -> Void) {
+    DispatchQueue.global().async {
+        // simulate delay
+        completion()
+    }
+}
