@@ -34,5 +34,8 @@ func constructTree(from eularTour: [Int]) -> TreeNode<Int>? {
     return head
 }
 
-
+//Display a genric tree
+func displayTree<T>(node: TreeNode<T>) {
+    
+}
 
