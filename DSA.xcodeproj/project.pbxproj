@@ -10,14 +10,10 @@
 		DFDE530A2E3F1F9000BE894C /* Swift_DataStructures_CheatSheet.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Swift_DataStructures_CheatSheet.md; sourceTree = "<group>"; };
 		DFDEBDC92E41008000BE894C /* Graph_level_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph_level_1.swift; sourceTree = "<group>"; };
 		DFDEBDCA2E41B2E100BE894C /* DP_level_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DP_level_1.swift; sourceTree = "<group>"; };
+		DFDEBDCB2E41B34C00BE894C /* GenricTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenricTree.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		DF1700412E1BBC4800883FB9 /* Tree, BST and Trie */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Tree, BST and Trie";
-			sourceTree = "<group>";
-		};
 		DF6CEE112E182EFE007A73AB /* Recursion & Arrays */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Recursion & Arrays";
@@ -44,10 +40,10 @@
 		DF7DD8412E16F3ED0009256C = {
 			isa = PBXGroup;
 			children = (
+				DFDEBDCB2E41B34C00BE894C /* GenricTree.swift */,
 				DFDEBDCA2E41B2E100BE894C /* DP_level_1.swift */,
 				DFDEBDC92E41008000BE894C /* Graph_level_1.swift */,
 				DFDE530A2E3F1F9000BE894C /* Swift_DataStructures_CheatSheet.md */,
-				DF1700412E1BBC4800883FB9 /* Tree, BST and Trie */,
 				DF6CEE192E1A63BB007A73AB /* Swift Basics */,
 				DF6CEE162E199B43007A73AB /* Stacks and Queue */,
 				DF6CEE142E1983B7007A73AB /* Linkedlist */,
