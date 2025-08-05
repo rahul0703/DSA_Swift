@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		DF7DD84B2E16F49B0009256C /* Easy_DP.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Easy_DP.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DFDE530A2E3F1F9000BE894C /* Swift_DataStructures_CheatSheet.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Swift_DataStructures_CheatSheet.md; sourceTree = "<group>"; };
 		DFDEBDC92E41008000BE894C /* Graph_level_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph_level_1.swift; sourceTree = "<group>"; };
+		DFDEBDCA2E41B2E100BE894C /* DP_level_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DP_level_1.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -44,6 +44,7 @@
 		DF7DD8412E16F3ED0009256C = {
 			isa = PBXGroup;
 			children = (
+				DFDEBDCA2E41B2E100BE894C /* DP_level_1.swift */,
 				DFDEBDC92E41008000BE894C /* Graph_level_1.swift */,
 				DFDE530A2E3F1F9000BE894C /* Swift_DataStructures_CheatSheet.md */,
 				DF1700412E1BBC4800883FB9 /* Tree, BST and Trie */,
@@ -51,16 +52,7 @@
 				DF6CEE162E199B43007A73AB /* Stacks and Queue */,
 				DF6CEE142E1983B7007A73AB /* Linkedlist */,
 				DF6CEE112E182EFE007A73AB /* Recursion & Arrays */,
-				DF7DD8482E16F4220009256C /* DP */,
 			);
-			sourceTree = "<group>";
-		};
-		DF7DD8482E16F4220009256C /* DP */ = {
-			isa = PBXGroup;
-			children = (
-				DF7DD84B2E16F49B0009256C /* Easy_DP.playground */,
-			);
-			path = DP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

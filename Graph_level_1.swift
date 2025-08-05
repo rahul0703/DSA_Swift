@@ -207,6 +207,42 @@ class Graph {
     return false // No Hamiltonian cycle found in this path
   }
   
+  /*
+   Question: Knight Tour problem
+   Desc: Given a chessboard of size n x n, find all possible paths of a knight starting from the top left corner to the bottom right corner, where no cell is visited twice.
+   */
+  let rowMoves = [2, 1, -1, -2, -2, -1, 1, 2]
+  let colMoves = [1, 2, 2, 1, -1, -2, -2, -1]
+  func findAllKnightTourPaths(n: Int) -> [[String]] {
+    var matrix: [[Int]] = Array(repeating: Array(repeating: 0, count: n), count: n)
+    var visited: [[Int]] = Array(repeating: Array(repeating: 0, count: n), count: n)
+    var result: [[String]] = []
+    var path: [String] = []
+    findAllKnightTourPathsHelper(matrix: &matrix, visited: &visited, n: n, row: 0, col: 0, result: &result, path: &path)
+    return result
+  }
+  
+  private func findAllKnightTourPathsHelper(matrix: inout [[Int]], visited: inout [[Int]], n: Int, row: Int, col: Int, result: inout [[String]], path: inout [String]) {
+    if row < 0 || row >= n || col < 0 || col >= n || visited[row][col] == 1 {
+      return // Out of bounds or already visited
+    }
+    visited[row][col] = 1
+    path.append("(\(row), \(col))") // Add current position to path
+    
+    if row == n - 1 && col == n - 1 {
+      result.append(path) // Reached the bottom right corner, add path to result
+    } else {
+      for i in 0 ..< 8 {
+        var ngr_row = row + rowMoves[i]
+        var ngr_col = col + colMoves[i]
+        
+        findAllKnightTourPathsHelper(matrix: &matrix, visited: &visited, n: n, row: ngr_row, col: ngr_col, result: &result, path: &path)
+      }
+    }
+    
+    visited[row][col] = 0 // Backtrack by marking the cell as unvisited
+    path.removeLast() // Remove the current position from path before returning
+  }
 }
 
 
