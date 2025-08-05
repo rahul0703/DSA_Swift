@@ -511,4 +511,48 @@ class DP_level_1 {
       }
       return cCount
   }
+  
+  /*
+   Question: Leetcode: 688 - Knight Tour Problem.
+   */
+  private let directions = [
+    (2, 1), (2, -1), (-2, 1), (-2, -1),
+    (1, 2), (1, -2), (-1, 2), (-1, -2)
+  ]
+  
+  func knightProbability(_ n: Int, _ k: Int, _ row: Int, _ column: Int) -> Double {
+    if k == 0 { return 1.0 }
+    // Initialize a 3D DP array with 0.0
+    var dp = Array(repeating: Array(repeating: Array(repeating: 0.0, count: n), count: n), count: k + 1)
+    
+    // Base case: At step 0, the knight is at (row, column)
+    dp[0][row][column] = 1.0
+    
+    // DP transition
+    for step in 1...k {
+      for r in 0..<n {
+        for c in 0..<n {
+          if dp[step - 1][r][c] > 0 {
+            for direction in directions {
+              let nr = r + direction.0
+              let nc = c + direction.1
+              if nr >= 0 && nr < n && nc >= 0 && nc < n {
+                dp[step][nr][nc] += dp[step - 1][r][c] / 8.0
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    // Sum up probabilities for all positions on the board after k moves
+    var result = 0.0
+    for r in 0..<n {
+      for c in 0..<n {
+        result += dp[k][r][c]
+      }
+    }
+    
+    return result
+  }
 }

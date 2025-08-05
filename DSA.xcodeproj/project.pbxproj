@@ -11,6 +11,7 @@
 		DFDEBDC92E41008000BE894C /* Graph_level_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph_level_1.swift; sourceTree = "<group>"; };
 		DFDEBDCA2E41B2E100BE894C /* DP_level_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DP_level_1.swift; sourceTree = "<group>"; };
 		DFDEBDCB2E41B34C00BE894C /* GenricTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenricTree.swift; sourceTree = "<group>"; };
+		DFDEBDCC2E41B5DD00BE894C /* Queue_Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue_Custom.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,6 +41,7 @@
 		DF7DD8412E16F3ED0009256C = {
 			isa = PBXGroup;
 			children = (
+				DFDEBDCC2E41B5DD00BE894C /* Queue_Custom.swift */,
 				DFDEBDCB2E41B34C00BE894C /* GenricTree.swift */,
 				DFDEBDCA2E41B2E100BE894C /* DP_level_1.swift */,
 				DFDEBDC92E41008000BE894C /* Graph_level_1.swift */,
