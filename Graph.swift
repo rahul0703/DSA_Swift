@@ -282,7 +282,121 @@ class Graph {
    Find the shortest path from source to all other nodes in a weighted graph using Dijkstra's algorithm.
    */
   func dijkstraAlgorithm(_ graph: [Int: [(Int, Int)]], _ start: Int) -> [Int] {
+    var answer = Array(repeating: Int.max, count: graph.count)
+    var visited = Array(repeating: false, count: graph.count)
+    var pq = PriorityQueue()
+    var startNode = GraphNode(val: start, dist: 0)
     
+    pq.enqueue(startNode)
+    answer[start] = 0 // Distance to the start node is 0
+    
+    while !pq.isEmpty() {
+      var removedNode = pq.dequeue()!
+      if visited[removedNode.val] {
+        continue // If the node is already visited, skip it
+      }
+      visited[removedNode.val] = true
+      
+      for ngr in graph[removedNode.val]! {
+        if !visited[ngr.0] {
+          let newDist = removedNode.dist + ngr.1
+          answer[ngr.0] = min(answer[ngr.0], newDist) // Update the distance if it's shorter
+          pq.enqueue(GraphNode(val: ngr.0, dist: newDist)) // Enqueue the neighbor with updated distance
+        }
+      }
+    }
+    return answer
+  }
+  /*
+   Shortest length of cable to connect all compiters in a network.
+   Approach: Use Prim's algorithm to find the minimum spanning tree (MST) of the graph.
+   */
+  func primsMST(_ graph: [Int: [(Int, Int)]]) -> Int {
+    var totalCost = 0
+    var visited = Array(repeating: false, count: graph.count)
+    var pq = PriorityQueue()
+    // 0 distance from the starting node
+    var startNode = GraphNode(val: 0, dist: 0)
+    pq.enqueue(startNode)
+    
+    while !pq.isEmpty() {
+      var removedNode = pq.dequeue()!
+      if visited[removedNode.val] {
+        continue // If the node is already visited, skip it.
+      }
+      visited[removedNode.val] = true
+      totalCost += removedNode.dist // Add the cost of the edge to the total cost
+      for ngr in graph[removedNode.val]! {
+        if !visited[ngr.0] {
+          pq.enqueue(GraphNode(val: ngr.0, dist: ngr.1)) // Enqueue the neighbor with its cost
+        }
+      }
+    }
+    return totalCost // Return the total cost of the MST
+  }
+  /*
+   
+   */
+  func topologicalSortUsingRecursionWithoutCycle(_ graph: [[Int]]) -> [Int] {
+    var answer: [Int] = []
+    var visited = Array(repeating: false, count: graph.count)
+    var stack: [Int] = []
+    
+    for node in 0 ..< graph.count {
+      if !visited[node] {
+        dfsTopo(graph, node, &visited, &stack)
+      }
+    }
+    return stack.reversed() // Return the topological order in reverse order
+  }
+  
+  func dfsTopo(_ graph: [[Int]], _ node: Int, _ visited: inout [Bool], _ stack: inout [Int]) {
+    visited[node] = true
+    for ngr in graph[node] {
+      if !visited[ngr] {
+        dfsTopo(graph, ngr, &visited, &stack) // Recursively visit the neighbors
+      }
+    }
+    stack.append(node) // Add the node to the stack after visiting all its neighbors while backtracking.
+  }
+  
+  /*
+   
+   */
+  func topoSortUsingDFSCycleDetection(_ graph: [[Int]]) -> [Int]? {
+    var visited = Array(repeating: false, count: graph.count)
+    var inRecursionStack = Array(repeating: false, count: graph.count)
+    var stack: [Int] = []
+    
+    for node in 0..<graph.count {
+      if !visited[node] {
+        if !dfsTopo(graph, node, &visited, &inRecursionStack, &stack) {
+          return nil // Cycle detected
+        }
+      }
+    }
+    return stack.reversed()
+  }
+  
+  private func dfsTopo(_ graph: [[Int]], _ node: Int,
+                       _ visited: inout [Bool],
+                       _ inRecStack: inout [Bool],
+                       _ stack: inout [Int]) -> Bool {
+    visited[node] = true
+    inRecStack[node] = true
+    for neighbor in graph[node] {
+      if !visited[neighbor] {
+        if !dfsTopo(graph, neighbor, &visited, &inRecStack, &stack) {
+          return false
+        }
+      } else if inRecStack[neighbor] {
+        // Cycle detected
+        return false
+      }
+    }
+    inRecStack[node] = false
+    stack.append(node)
+    return true
   }
 }
 

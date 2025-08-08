@@ -40,7 +40,7 @@ struct QueueCustom<T> {
   }
 }
 
-struct Node: Comparable {
+struct GraphNode: Comparable {
   var val: Int
   var dist: Int
   
@@ -49,27 +49,27 @@ struct Node: Comparable {
     self.dist = dist
   }
   
-  func < (lhs: Node, rhs: Node) -> Bool {
+  func < (lhs: GraphNode, rhs: GraphNode) -> Bool {
     return lhs.dist < rhs.dist
   }
 }
 
 struct PriorityQueue {
-  private var elements: [Node] = []
+  private var elements: [GraphNode] = []
   
   var isEmpty: Bool {
     return elements.isEmpty
   }
   
-  var peek: Node? {
+  var peek: GraphNode? {
     return elements.min() // lowest dist Node
   }
   
-  mutating func enqueue(_ node: Node) {
+  mutating func enqueue(_ node: GraphNode) {
     elements.append(node)
   }
   
-  mutating func dequeue() -> Node? {
+  mutating func dequeue() -> GraphNode? {
     guard !elements.isEmpty else { return nil }
     elements.sort()              // Sort by dist ascending
     return elements.removeFirst() // Remove node with smallest dist
