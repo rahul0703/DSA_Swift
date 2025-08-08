@@ -16,14 +16,10 @@
 		DFF891552E46131600CB343F /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		DFF891562E463F0A00CB343F /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		DFF891572E463FA100CB343F /* Backtracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backtracking.swift; sourceTree = "<group>"; };
+		DFF891582E463FE100CB343F /* Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrays.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		DF6CEE112E182EFE007A73AB /* Recursion & Arrays */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Recursion & Arrays";
-			sourceTree = "<group>";
-		};
 		DF6CEE192E1A63BB007A73AB /* Swift Basics */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Swift Basics";
@@ -35,6 +31,7 @@
 		DF7DD8412E16F3ED0009256C = {
 			isa = PBXGroup;
 			children = (
+				DFF891582E463FE100CB343F /* Arrays.swift */,
 				DFF891572E463FA100CB343F /* Backtracking.swift */,
 				DFF891562E463F0A00CB343F /* Stack.swift */,
 				DFF891552E46131600CB343F /* LinkedList.swift */,
@@ -45,7 +42,6 @@
 				DFDEBDC92E41008000BE894C /* Graph_level_1.swift */,
 				DFDE530A2E3F1F9000BE894C /* Swift_DataStructures_CheatSheet.md */,
 				DF6CEE192E1A63BB007A73AB /* Swift Basics */,
-				DF6CEE112E182EFE007A73AB /* Recursion & Arrays */,
 			);
 			sourceTree = "<group>";
 		};
