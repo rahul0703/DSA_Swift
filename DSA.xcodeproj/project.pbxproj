@@ -8,7 +8,7 @@
 
 /* Begin PBXFileReference section */
 		DFDE530A2E3F1F9000BE894C /* Swift_DataStructures_CheatSheet.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Swift_DataStructures_CheatSheet.md; sourceTree = "<group>"; };
-		DFDEBDC92E41008000BE894C /* Graph_level_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph_level_1.swift; sourceTree = "<group>"; };
+		DFDEBDC92E41008000BE894C /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		DFDEBDCA2E41B2E100BE894C /* DP_level_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DP_level_1.swift; sourceTree = "<group>"; };
 		DFDEBDCB2E41B34C00BE894C /* GenricTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenricTree.swift; sourceTree = "<group>"; };
 		DFDEBDCC2E41B5DD00BE894C /* Queue_Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue_Custom.swift; sourceTree = "<group>"; };
@@ -39,7 +39,7 @@
 				DFDEBDCC2E41B5DD00BE894C /* Queue_Custom.swift */,
 				DFDEBDCB2E41B34C00BE894C /* GenricTree.swift */,
 				DFDEBDCA2E41B2E100BE894C /* DP_level_1.swift */,
-				DFDEBDC92E41008000BE894C /* Graph_level_1.swift */,
+				DFDEBDC92E41008000BE894C /* Graph.swift */,
 				DFDE530A2E3F1F9000BE894C /* Swift_DataStructures_CheatSheet.md */,
 				DF6CEE192E1A63BB007A73AB /* Swift Basics */,
 			);

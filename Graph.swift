@@ -246,8 +246,38 @@ class Graph {
   
   /*
    Question: Detect cycle in graph
-   Solution: use BFS
+   Solution: use BFS and track visited nodes, if we encounter a node already visited then cycle is present.
+   Logic: If the node is enqueued more than 2 times before being marked visited, then a cycle is detected.
    */
+  func detectCycleInUndirectedGraph(graph: [Int: [Int]]) -> Bool {
+    var visited = Array(repeating: false, count: graph.count)
+    for node in graph.keys {
+      if !visited[node] {
+        if bfs(graph, node, &visited) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+  
+  private func bfs(_ graph: [Int: [Int]], _ start: Int, _ visited: inout [Bool]) -> Bool {
+    var queue: QueueCustom<Int> = QueueCustom()
+    queue.enqueue(start)
+    while !queue.isEmpty() {
+      let poppedNode = queue.dequeue()!
+      if visited[poppedNode] {
+        return true // Cycle detected
+      }
+      visited[poppedNode] = true
+      for ngr in graph[poppedNode]! {
+        if !visited[ngr] {
+          queue.enqueue(ngr) // Enqueue unvisited neighbors
+        }
+      }
+    }
+    return false // No cycle detected
+  }
 }
 
 
