@@ -39,3 +39,39 @@ struct QueueCustom<T> {
     }
   }
 }
+
+struct Node: Comparable {
+  var val: Int
+  var dist: Int
+  
+  init(val: Int, dist: Int) {
+    self.val = val
+    self.dist = dist
+  }
+  
+  func < (lhs: Node, rhs: Node) -> Bool {
+    return lhs.dist < rhs.dist
+  }
+}
+
+struct PriorityQueue {
+  private var elements: [Node] = []
+  
+  var isEmpty: Bool {
+    return elements.isEmpty
+  }
+  
+  var peek: Node? {
+    return elements.min() // lowest dist Node
+  }
+  
+  mutating func enqueue(_ node: Node) {
+    elements.append(node)
+  }
+  
+  mutating func dequeue() -> Node? {
+    guard !elements.isEmpty else { return nil }
+    elements.sort()              // Sort by dist ascending
+    return elements.removeFirst() // Remove node with smallest dist
+  }
+}

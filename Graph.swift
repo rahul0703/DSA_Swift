@@ -278,6 +278,12 @@ class Graph {
     }
     return false // No cycle detected
   }
+  /*
+   Find the shortest path from source to all other nodes in a weighted graph using Dijkstra's algorithm.
+   */
+  func dijkstraAlgorithm(_ graph: [Int: [(Int, Int)]], _ start: Int) -> [Int] {
+    
+  }
 }
 
 
