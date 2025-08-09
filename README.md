@@ -139,6 +139,7 @@ This file provides a categorized list of important DSA topics commonly tested in
 - [Jump Game 2](https://leetcode.com/problems/jump-game-ii/) 
 - [Task Schedular](https://leetcode.com/problems/task-scheduler/description/)
 - [Non Overlaping Intervals](https://leetcode.com/problems/non-overlapping-intervals/description/)
+- [Gas Station](https://leetcode.com/problems/gas-station/)
 - Activity selection
 - Interval scheduling
 - Huffman coding
