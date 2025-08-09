@@ -37,20 +37,44 @@
 		DF7DD8412E16F3ED0009256C = {
 			isa = PBXGroup;
 			children = (
+				DFF8915F2E471CA000CB343F /* Stack and Queue */,
+				DFF8915E2E471C0700CB343F /* Dynamic Programming */,
+				DFF8915D2E471BE300CB343F /* Trees, Graphs & Heaps */,
 				DFF8915B2E471A9600CB343F /* DSA Notes */,
 				DFF891592E47106800CB343F /* Greedy.swift */,
 				DFF891582E463FE100CB343F /* Arrays.swift */,
 				DFF891572E463FA100CB343F /* Backtracking.swift */,
-				DFF891562E463F0A00CB343F /* Stack.swift */,
 				DFF891552E46131600CB343F /* LinkedList.swift */,
-				DFDEBDCD2E41CE3100BE894C /* PriorityQueueCustom.swift */,
-				DFDEBDCC2E41B5DD00BE894C /* Queue_Custom.swift */,
-				DFDEBDCB2E41B34C00BE894C /* GenricTree.swift */,
-				DFDEBDCA2E41B2E100BE894C /* DP level 1.swift */,
-				DFDEBDC92E41008000BE894C /* Graph.swift */,
 				DFDE530A2E3F1F9000BE894C /* Swift_DataStructures_CheatSheet.md */,
 				DF6CEE192E1A63BB007A73AB /* Swift Basics */,
 			);
+			sourceTree = "<group>";
+		};
+		DFF8915D2E471BE300CB343F /* Trees, Graphs & Heaps */ = {
+			isa = PBXGroup;
+			children = (
+				DFDEBDCB2E41B34C00BE894C /* GenricTree.swift */,
+				DFDEBDC92E41008000BE894C /* Graph.swift */,
+				DFDEBDCD2E41CE3100BE894C /* PriorityQueueCustom.swift */,
+			);
+			path = "Trees, Graphs & Heaps";
+			sourceTree = "<group>";
+		};
+		DFF8915E2E471C0700CB343F /* Dynamic Programming */ = {
+			isa = PBXGroup;
+			children = (
+				DFDEBDCA2E41B2E100BE894C /* DP level 1.swift */,
+			);
+			path = "Dynamic Programming";
+			sourceTree = "<group>";
+		};
+		DFF8915F2E471CA000CB343F /* Stack and Queue */ = {
+			isa = PBXGroup;
+			children = (
+				DFF891562E463F0A00CB343F /* Stack.swift */,
+				DFDEBDCC2E41B5DD00BE894C /* Queue_Custom.swift */,
+			);
+			path = "Stack and Queue";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
