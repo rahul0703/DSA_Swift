@@ -441,6 +441,134 @@ class Graph {
     return answer // Return the topological order
   }
   
+  /*
+   Question: Find the minimum number of edge swap to reach from source to estination in a directed graaph.
+   Solution:
+      1. We need to make the directed graph into undirected graph. To do so, we need to add a reverse edge with cost 1.
+      2. Use Dijkstra's algorithm to find the shortest path from source to destination.
+      3. But, if you notice the edge weights are either 0 or 1, so we can use 0-1 BFS to find the shortest path.
+   */
+  func minEdgeSwapToReachDesitiation(_ graph: [[Int]], _ source: Int, _ destination: Int) -> Int {
+    var size = graph.count
+    if size == 0 || source < 0 || destination < 0 || source >= size || destination >= size || source == destination {
+      return 0
+    }
+    var newGraph = Array(repeating: [(Int, Int)](), count: size)
+    for i in 0 ..< size {
+      for ngr in graph[i] {
+        newGraph[i].append((ngr, 0)) // Add the original edge with cost 0
+        newGraph[ngr].append((i, 1)) // Add the reverse edge with cost 1
+      }
+    }
+    var visited: [Bool] = Array(repeating: false, count: size)
+    var queue: [(Int, Int)] = []
+    queue.append((source, 0))
+    
+    while !queue.isEmpty {
+      var poppedNode = queue.removeFirst()
+      if visited[node] {
+          continue
+      }
+      visited[poppedNode.0] = true // Mark the node as visited
+      if poppedNode.0 == destination {
+        return poppedNode.1 // If we reached the destination, return the answer
+      }
+      
+      for (ngr, cost) in newGraph[poppedNode.0] {
+        if !visited[ngr] {
+          if cost == 0 {
+            queue.insert((ngr, poppedNode.1), at: 0) // If cost is 0, add to front of queue
+          } else {
+            queue.append((ngr, poppedNode.1 + cost)) // If cost is 1, add to back of queue
+          }
+        }
+      }
+    }
+    return -1 // If we reach here, it means we couldn't reach the destination
+  }
+  
+  /*
+   Minimum Spanning Tree using Krushkal's Algorithm
+   Approcach:
+    1. Sort the edges based on their weights.
+    2. Use a union-find data structure to keep track of connected components.
+    3. Iterate through the sorted edges and add them to the MST.
+    4. Add thw weights of the edges to the total cost.
+   */
+  func MSTWithKrushkalAlgorithm(_ graph: [[Int]]) -> Int {
+    //graph[i] = [u, v, weight]
+    var graph = graph.sorted { $0[2] < $1[2] } // Sort edges based on weights
+    var answer = 0
+    let n = graph.flatMap { [$0[0], $0[1]] }.max()! + 1
+    var parent = Array(repeating: -1, count: n)
+    var rank = Array(repeating: 0, count: n)
+    
+    for edge in graph {
+      let u = edge[0]
+      let v = edge[1]
+      
+      if findParent(u, &parent) != findParent(v, &parent) {
+        union(u, v, &parent, &rank) // Union the two components
+        answer += edge[2] // Add the weight of the edge to the total cost
+      }
+    }
+    return answer // Return the total cost of the MST
+  }
+  
+  private func findParent(_ node: Int, _ parent: inout [Int]) -> Int {
+    if parent[node] == -1 {
+      return node // If the node is its own parent, return it
+    }
+    parent[node] = findParent(parent[node], &parent) // Path compression
+    return parent[node] // Return the parent of the node
+  }
+  
+  private func union(_ u: Int, _ v: Int, _ parent: inout [Int], _ rank: inout [Int]) {
+    let parentU = findParent(u, &parent)
+    let parentV = findParent(v, &parent)
+    let rankU = rank[parentU]
+    let rankV = rank[parentV]
+    
+    if rankU > rankV {
+      parent[parentV] = parentU // Make parentU the parent of parentV
+    } else if rankU < rankV {
+      parent[parentU] = parentV // Make parentV the parent of parentU
+    } else {
+      parent[parentV] = parentU // Make parentU the parent of parentV
+      rank[parentU] += 1 // Increment the rank of parentU
+    }
+  }
+  
+  /*
+   Shortest path in a directed graph with negative weights using Bellman-Ford algorithm
+   */
+  func bellmanFord(_ graph: [[Int]], _ source: Int) -> [Int]? {
+    //graph[i] = [u, v, weight]
+    var length = graph.flatMap { [$0[0], $0[1]] }.max()! + 1
+    var answer = Array(repeating: Int.max, count: length)
+    answer[source] = 0 // Distance to the source is 0
+    
+    for _ in 0 ..< length - 1 {
+      for edge in graph {
+        let u = edge[0]
+        let v = edge[1]
+        let weight = edge[2]
+        if answer[u] != Int.max {
+          answer[v] = min(answer[v], answer[u] + weight) // Relax the edge
+        }
+      }
+    }
+    var newArray = answer
+    for edge in graph {
+      if newArray[edge[0]] != Int.max {
+        newArray[edge[1]] = min(newArray[edge[1]], newArray[edge[0]] + edge[2]) // Relax the edge again to check for negative cycles
+      }
+    }
+    if answer == newArray {
+      return answer
+    }
+    return nil
+  }
 }
 
 

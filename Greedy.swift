@@ -137,4 +137,32 @@ class Greedy {
       return lhs.char == rhs.char && lhs.count == rhs.count
     }
   }
+  
+  /*
+   Question: Leetcode 134, Gas Station
+   Approach: Calculate anticlockwise the maximum gas that can be collected if we start from each station.
+   */
+  func canCompleteCircuit(_ gas: [Int], _ cost: [Int]) -> Int {
+    var gasTotal = gas.reduce(0) { $0 + $1 }
+    var totalCost = cost.reduce(0) { $0 + $1 }
+    
+    if totalCost > gasTotal {
+      return -1
+    }
+    var count = gas.count
+    var maxGas = 0
+    var totalGas = 0
+    var maxIndex = -1
+    for i in (0 ..< count).reversed() {
+      var gasAtI = gas[i]
+      var costAtI = cost[i]
+      
+      totalGas += (gasAtI - costAtI)
+      if totalGas >= maxGas {
+        maxGas = totalGas
+        maxIndex = i
+      }
+    }
+    return maxIndex
+  }
 }
