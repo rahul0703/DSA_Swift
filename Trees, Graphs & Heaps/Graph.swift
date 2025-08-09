@@ -398,6 +398,49 @@ class Graph {
     stack.append(node)
     return true
   }
+  
+  /*
+   Topological sort Iterative using Kahn's algorithm
+   Approach:
+    1. Fill a array based on degree of each node. Where degree is number of incoming edges.
+    2. Use a queue to process nodes with zero incoming edges and reduce the degree of their ngrs. If the ngr degree is 0 then append into queue and add the count.
+    3. Repeat until the queue is empty.
+    4. If, queue is empty and not all nodes are processed (count != n) then cycle is present.
+   */
+  func kahnsTopologicalSort(_ graph: [[Int]]) -> [Int] {
+    var count = graph.count
+    var nDegree = Array(repeating: 0, count: graph.count)
+    var queue: [Int] = []
+    //Loop over the graph to fill ndegree array
+    for i in 0 ..< graph.count {
+      for ngr in graph[i] {
+        nDegree[ngr] += 1
+      }
+    }
+    for i in 0 ..< nDegree.count {
+      if nDegree[i] == 0 {
+        queue.append(i) // If degree is 0 then add to queue
+      }
+    }
+    var answer: [Int] = []
+    var count = 0 // Count of nodes processed
+    while(!queue.isEmpty) {
+      var poppedNode = queue.removeFirst()
+      answer.append(poppedNode) // Add the node to the answer
+      count += 1
+      for ngr in graph[poppedNode] {
+        nDegree[ngr] -= 1 // Reduce the degree of the neighbor
+        if nDegree[ngr] == 0 {
+          queue.append(ngr) // If degree becomes 0 then add to queue
+        }
+      }
+    }
+    if count != graph.count {
+      return [] // Cycle detected, return empty array
+    }
+    return answer // Return the topological order
+  }
+  
 }
 
 

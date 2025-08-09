@@ -72,6 +72,69 @@ class Greedy {
   }
   
   /*
-   Question: Leetcode 621, Task Scheduler
+   Very Important: Question: Leetcode 621, Task Scheduler
+   
    */
+  
+  func leastInterval(_ tasks: [Character], _ n: Int) -> Int {
+    var len = tasks.count
+    var countArray = Array(repeating: 0, count: 26)
+    var a: Character = "A"
+    for char in tasks {
+      var idx = Int(char.asciiValue! - a.asciiValue!)
+      countArray[idx] += 1
+    }
+    var pq = PriorityQueueCustom<Node>()
+    for i in 0 ..< 26 {
+      if countArray[i] > 0 {
+        var node = Node(i, countArray[i])
+        pq.push(node)
+      }
+    }
+    var array: [Node] = []
+    var pointer = len
+    var time = 0
+    while pointer > 0 {
+      var interval = n+1
+      while !pq.isEmpty {
+        var popped = pq.pop()!
+        pointer -= 1
+        interval -= 1
+        time += 1
+        popped.count -= 1
+        array.append(popped)
+        if interval == 0 {
+          break
+        }
+      }
+      if pointer > 0 {
+        time += interval
+      }
+      for node in array {
+        if node.count > 0 {
+          pq.push(node)
+        }
+      }
+      array = []
+    }
+    return time
+  }
+  
+  class Node: Comparable {
+    var char: Int
+    var count: Int
+    
+    init(_ char: Int, _ count: Int) {
+      self.char = char
+      self.count = count
+    }
+    
+    static func < (lhs: Node, rhs: Node) -> Bool {
+      return lhs.count > rhs.count // Max-heap on priority
+    }
+    
+    static func == (lhs: Node, rhs: Node) -> Bool {
+      return lhs.char == rhs.char && lhs.count == rhs.count
+    }
+  }
 }

@@ -6,13 +6,11 @@
 //
 
 import Foundation
-struct PriorityQueueCustom<T> {
+struct PriorityQueueCustom<T: Comparable> {
   private var heap: [T]
-  private let areSorted: (T, T) -> Bool
   
-  init(sort: @escaping (T, T) -> Bool) {
+  init() {
     self.heap = []
-    self.areSorted = sort
   }
   
   var isEmpty: Bool {
@@ -47,7 +45,8 @@ struct PriorityQueueCustom<T> {
   private mutating func siftUp(from index: Int) {
     var child = index
     var parent = (child - 1) / 2
-    while child > 0 && areSorted(heap[child], heap[parent]) {
+    
+    while child > 0 && heap[child] < heap[parent] {
       heap.swapAt(child, parent)
       child = parent
       parent = (child - 1) / 2
@@ -63,12 +62,13 @@ struct PriorityQueueCustom<T> {
       let right = 2 * parent + 2
       var candidate = parent
       
-      if left < count && areSorted(heap[left], heap[candidate]) {
+      if left < count && heap[left] < heap[candidate] {
         candidate = left
       }
-      if right < count && areSorted(heap[right], heap[candidate]) {
+      if right < count && heap[right] < heap[candidate] {
         candidate = right
       }
+      
       if candidate == parent { break }
       
       heap.swapAt(parent, candidate)
@@ -76,3 +76,4 @@ struct PriorityQueueCustom<T> {
     }
   }
 }
+
