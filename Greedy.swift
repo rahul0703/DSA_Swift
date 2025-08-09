@@ -165,4 +165,97 @@ class Greedy {
     }
     return maxIndex
   }
+  
+  /*
+   Question: Leetcode 452, Minimum Number of Arrows to Burst Balloons
+   Approach: Simple merge interval problem
+   Rememer: while merging intervals, always sort on basis of end time of intervals.
+   */
+  func findMinArrowShots(_ points: [[Int]]) -> Int {
+    var sortedArray = points.sorted {
+      if $0[1] == $1[1] {
+        return $0[0] < $1[0]
+      }
+      return $0[1] < $1[1]
+    }
+    
+    var answer = 0
+    var count = points.count
+    if count == 0 || count == 1{
+      return count
+    }
+    var back = 0
+    var forward = 1
+    answer += 1
+    while forward < count {
+      if sortedArray[back][1] < sortedArray[forward][0] {
+        answer += 1
+        back = forward
+      }
+      forward += 1
+    }
+    return answer
+  }
+  
+  /*
+   Question: leetcode 122 Best Time to Buy and Sell Stock II
+    When next element is smaller, make a sell and update buy price and sell price.
+    When next element is greater, update the sell price.
+    At last if sell price > buy price, make a sell and return answer
+   */
+  func maxProfit(_ prices: [Int]) -> Int {
+    var buyPrice = prices[0]
+    var sellPrice = prices[0]
+    var answer = 0
+    for i in 1 ..< prices.count {
+      var ele = prices[i]
+      if ele < sellPrice {
+        answer += sellPrice - buyPrice
+        buyPrice = ele
+        sellPrice = ele
+      } else {
+        sellPrice = ele
+      }
+    }
+    
+    if sellPrice >= buyPrice {
+      answer += sellPrice - buyPrice
+    }
+    return answer
+  }
+  
+  /*
+   Question: Leetcode 763 Partition Labels
+   */
+  func partitionLabels(_ s: String) -> [Int] {
+    var countArray = Array(repeating: 0, count: 26)
+    for char in s {
+      var index = Int(char.asciiValue! - Character("a").asciiValue!)
+      countArray[index] += 1
+    }
+    
+    var answer: [Int] = []
+    var length = 0
+    var hasSet = Set<Int>()
+    for char in s {
+      var idx = Int(char.asciiValue! - Character("a").asciiValue!)
+      countArray[idx] -= 1
+      hasSet.insert(idx)
+      length += 1
+      var size = hasSet.count
+      var count = 0
+      for idx in hasSet {
+        if countArray[idx] == 0 {
+          count += 1
+        }
+      }
+      if count == size {
+        answer.append(length)
+        length = 0
+        hasSet.removeAll()
+      }
+    }
+    
+    return answer
+  }
 }
