@@ -9,7 +9,7 @@ import Foundation
 
 class Greedy {
   /*
-   Question: Min Jump 2
+   Question: Leetcode 45, Min Jump 2
    Desc:
     Each element nums[i] represents the maximum length of a forward jump from index i. In other words, if you are at index i, you can jump to any index (i + j)
     Return the minimum number of jumps to reach index n - 1. The test cases are generated such that you can reach index n - 1.
@@ -70,4 +70,8 @@ class Greedy {
     }
     return answer
   }
+  
+  /*
+   Question: Leetcode 621, Task Scheduler
+   */
 }

@@ -26,12 +26,18 @@
 			path = "Swift Basics";
 			sourceTree = "<group>";
 		};
+		DFF8915B2E471A9600CB343F /* DSA Notes */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "DSA Notes";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXGroup section */
 		DF7DD8412E16F3ED0009256C = {
 			isa = PBXGroup;
 			children = (
+				DFF8915B2E471A9600CB343F /* DSA Notes */,
 				DFF891592E47106800CB343F /* Greedy.swift */,
 				DFF891582E463FE100CB343F /* Arrays.swift */,
 				DFF891572E463FA100CB343F /* Backtracking.swift */,
