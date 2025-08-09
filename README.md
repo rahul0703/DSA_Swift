@@ -136,6 +136,7 @@ This file provides a categorized list of important DSA topics commonly tested in
 - State compression
 
 ## 🔹 Greedy Algorithms
+- [Task Schedular](https://leetcode.com/problems/task-scheduler/description/)
 - Activity selection
 - Interval scheduling
 - Huffman coding
